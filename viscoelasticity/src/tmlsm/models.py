@@ -1,3 +1,5 @@
+"""Model implementations."""
+
 from typing import Callable
 
 import equinox as eqx

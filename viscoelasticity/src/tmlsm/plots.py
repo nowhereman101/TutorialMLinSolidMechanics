@@ -1,3 +1,5 @@
+"""Plotting utilities."""
+
 from matplotlib import pyplot as plt
 import numpy as np
 
@@ -16,46 +18,44 @@ def plot_data(eps, eps_dot, sig, omegas, As):
     n = len(eps[0])
     ns = np.linspace(0, 2 * np.pi, n)
 
-    plt.figure(dpi=600, figsize=(10, 8))
-    plt.subplot(2, 2, 1)
-    plt.title("Data")
+    fig, axs = plt.subplots(2, 2, figsize=(10, 8))
+    fig.suptitle("Data")
 
+    ax = axs[0, 0]
     for i in range(len(eps)):
-        plt.plot(
+        ax.plot(
             ns,
             sig[i],
             label="$\\omega$: %.2f, $A$: %.2f" % (omegas[i], As[i]),
             color=colors[i],
             linestyle="--",
         )
-        plt.xlim([0, 2 * np.pi])
-        plt.ylabel("stress $\\sigma$")
-        plt.xlabel("time $t$")
-        plt.legend()
+    ax.set_xlim([0, 2 * np.pi])
+    ax.set_ylabel("stress $\\sigma$")
+    ax.set_xlabel("time $t$")
+    ax.legend()
 
-    plt.subplot(2, 2, 2)
-
+    ax = axs[0, 1]
     for i in range(len(eps)):
-        plt.plot(eps[i], sig[i], color=colors[i], linestyle="--")
-        plt.xlabel("strain $\\varepsilon$")
-        plt.ylabel("stress $\\sigma$")
+        ax.plot(eps[i], sig[i], color=colors[i], linestyle="--")
+    ax.set_xlabel("strain $\\varepsilon$")
+    ax.set_ylabel("stress $\\sigma$")
 
-    plt.subplot(2, 2, 3)
-
+    ax = axs[1, 0]
     for i in range(len(eps)):
         plt.plot(ns, eps[i], color=colors[i], linestyle="--")
-        plt.xlim([0, 2 * np.pi])
-        plt.xlabel("time $t$")
-        plt.ylabel("strain $\\varepsilon$")
+    ax.set_xlim([0, 2 * np.pi])
+    ax.set_xlabel("time $t$")
+    ax.set_ylabel("strain $\\varepsilon$")
 
-    plt.subplot(2, 2, 4)
-
+    ax = axs[1, 1]
     for i in range(len(eps)):
         plt.plot(ns, eps_dot[i], color=colors[i], linestyle="--")
-        plt.xlim([0, 2 * np.pi])
-        plt.xlabel("time $t$")
-        plt.ylabel(r"strain rate $\.{\varepsilon}$")
+    ax.set_xlim([0, 2 * np.pi])
+    ax.set_xlabel("time $t$")
+    ax.set_ylabel(r"strain rate $\.{\varepsilon}$")
 
+    fig.tight_layout()
     plt.show()
 
 
@@ -63,32 +63,30 @@ def plot_model_pred(eps, sig, sig_m, omegas, As):
     n = len(eps[0])
     ns = np.linspace(0, 2 * np.pi, n)
 
-    plt.figure(dpi=600, figsize=(10, 4))
+    fig, axs = plt.subplots(1, 2, figsize=(10, 4))
+    fig.suptitle("Data: dashed line, model prediction: continuous line")
 
-    plt.subplot(1, 2, 1)
-
-    plt.title("Data: dashed line, model prediction: continuous line")
-
+    ax = axs[0]
     for i in range(len(eps)):
-        plt.plot(
+        ax.plot(
             ns,
             sig[i],
             label="$\\omega$: %.2f, $A$: %.2f" % (omegas[i], As[i]),
             linestyle="--",
             color=colors[i],
         )
-        plt.plot(ns, sig_m[i], color=colors[i])
-        plt.xlim([0, 2 * np.pi])
-        plt.ylabel("stress $\\sigma$")
-        plt.xlabel("time $t$")
-        plt.legend()
+        ax.plot(ns, sig_m[i], color=colors[i])
+    ax.set_xlim([0, 2 * np.pi])
+    ax.set_ylabel("stress $\\sigma$")
+    ax.set_xlabel("time $t$")
+    ax.legend()
 
-    plt.subplot(1, 2, 2)
-
+    ax = axs[1]
     for i in range(len(eps)):
         plt.plot(eps[i], sig[i], linestyle="--", color=colors[i])
         plt.plot(eps[i], sig_m[i], color=colors[i])
-        plt.xlabel("strain $\\varepsilon$")
-        plt.ylabel("stress $\\sigma$")
+    ax.set_xlabel("strain $\\varepsilon$")
+    ax.set_ylabel("stress $\\sigma$")
 
+    fig.tight_layout()
     plt.show()
