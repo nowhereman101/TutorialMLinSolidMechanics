@@ -19,3 +19,12 @@ This repository offers a collection of lecture material and minimum working code
 * Task 1: Feed-forward neural networks
 * Task 2: Hyperelasticity
 * Task 3: Viscoelasticity
+
+## Additional materials
+
+Below you find the links to some helpful resources.
+
+- [The klax repository](https://github.com/drenderer/klax)
+- [The JAX repository](https://github.com/jax-ml/jax)
+- [The Equinox repository](https://github.com/patrick-kidger/equinox)
+- [The uv package manager](https://docs.astral.sh/uv/getting-started/installation/)
