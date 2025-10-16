@@ -28,6 +28,7 @@ class Model(eqx.Module):
             jax.nn.softplus,
             jax.nn.softplus,
             jax.nn.softplus,
+            jax.nn.softplus,
             lambda x: x,
         )
 
