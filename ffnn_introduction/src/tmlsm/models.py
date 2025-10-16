@@ -20,10 +20,12 @@ class Model(eqx.Module):
             klax.nn.Linear("scalar", 16, weight_init=he_normal(), key=key),
             klax.nn.Linear(16, 16, weight_init=he_normal(), key=key),
             klax.nn.Linear(16, 16, weight_init=he_normal(), key=key),
+            klax.nn.Linear(16, 16, weight_init=he_normal(), key=key),
             klax.nn.Linear(16, "scalar", weight_init=he_normal(), key=key),
         )
 
         self.activations = (
+            jax.nn.softplus,
             jax.nn.softplus,
             jax.nn.softplus,
             lambda x: x,
